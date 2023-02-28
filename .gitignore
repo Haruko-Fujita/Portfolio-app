@@ -5,9 +5,7 @@
 
 /server/node_modules
 /server/.env
-/server/node_modules
 /server/views
 /server/public
 
 .env
-MEMO.md
