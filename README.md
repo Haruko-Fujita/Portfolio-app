@@ -35,10 +35,10 @@ DEMO の実行方法など、"hoge"の基本的な使い方を説明する -->
   
 2.サーバー起動
   
-2-1.Next.js起動  ```cd client``` ```npm run dev```    
+2-1.Next.js起動  ```cd client``` ```npm install``` ```npm run dev```    
 アプリにアクセスする  ```http://localhost:3000```  
   
-2-2.Express起動  ```cd server``` ```npm run dev```  
+2-2.Express起動  ```cd server``` ```npm install``` ```npm run dev```  
 アプリにアクセスする ```http://localhost:5000/```
   
 2-3.MySQL起動
