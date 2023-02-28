@@ -1,0 +1,13 @@
+/client/node_modules
+/client/.next
+/client/.env
+/client/FirebaseConfig.js
+
+/server/node_modules
+/server/.env
+/server/node_modules
+/server/views
+/server/public
+
+.env
+MEMO.md
