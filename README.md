@@ -24,7 +24,7 @@
 - Amazon S3
   
 ## システム構成
-![image](https://user-images.githubusercontent.com/94355319/221767335-a7985a5d-da68-4a26-8be5-a1182f4c30e3.png)  
+![image](https://user-images.githubusercontent.com/94355319/222140205-53f5cd7f-8f22-4757-a59b-5a83a522e344.png)  
   
 <!-- Usage
 DEMO の実行方法など、"hoge"の基本的な使い方を説明する -->
