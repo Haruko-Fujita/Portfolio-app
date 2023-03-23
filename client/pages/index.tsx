@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <meta charSet="utf-8" />
         <title>portfolio</title>
