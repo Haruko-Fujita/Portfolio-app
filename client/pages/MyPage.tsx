@@ -1,10 +1,12 @@
+import "tailwindcss/tailwind.css";
 import Link from "next/link";
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
 import axios from "axios";
 import Upload from "./uploadImg";
 import NotFound from "./NotFound";
+import ButtonBlue from "@/components/ButtonBlue";
 
 const ENDPOINT = "http://localhost:5000/works/";
 
@@ -90,6 +92,7 @@ const MyPage = ({ worksData }) => {
               <div>{Upload()}</div>
               <p></p>
               <button onClick={logout}>ログアウト</button>
+              <ButtonBlue>test</ButtonBlue>
               <p></p>
               <Link href="/">back to home</Link>
               <p></p>
