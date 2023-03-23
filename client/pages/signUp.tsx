@@ -1,3 +1,6 @@
+import "tailwindcss/tailwind.css";
+import Layout from "@/components/Layout";
+import ButtonBlue from "@/components/ButtonBlue";
 import Link from "next/link";
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -30,34 +33,30 @@ const SignUp = () => {
 
   return (
     <>
-      <h1>ユーザー新規登録</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>メールアドレス</label>
-          <input
-            name="email"
-            type="email"
-            value={signUpEmail}
-            onChange={(event) => setRegisterEmail(event.target.value)}
-          />
-        </div>
-        <div>
-          <label>パスワード（6文字以上）</label>
-          <input
-            name="password"
-            type="password"
-            value={signUpPassword}
-            onChange={(event) => setRegisterPassword(event.target.value)}
-          />
-        </div>
-        <button>登録する</button>
-      </form>
-
-      <p></p>
-      <a href="/signIn">ログインはこちら</a>
-
-      <p></p>
-      <a href="/">back to home</a>
+      <Layout>
+        <h1>ユーザー新規登録</h1>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>メールアドレス</label>
+            <input
+              name="email"
+              type="email"
+              value={signUpEmail}
+              onChange={(event) => setRegisterEmail(event.target.value)}
+            />
+          </div>
+          <div>
+            <label>パスワード（6文字以上）</label>
+            <input
+              name="password"
+              type="password"
+              value={signUpPassword}
+              onChange={(event) => setRegisterPassword(event.target.value)}
+            />
+          </div>
+          <ButtonBlue>登録する</ButtonBlue>
+        </form>
+      </Layout>
     </>
   );
 };

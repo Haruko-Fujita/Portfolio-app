@@ -35,7 +35,6 @@ const SignIn = () => {
         <a href="/MyPage">go to myPage</a>
       ) : (
         <Layout>
-          <>
             <h1>ログインページ</h1>
             <form onSubmit={handleSubmit}>
               <div>
@@ -60,7 +59,6 @@ const SignIn = () => {
             </form>
             <p></p>
             <a href="/signUp">ユーザー新規登録はこちら</a>
-          </>
         </Layout>
       )}
     </>
