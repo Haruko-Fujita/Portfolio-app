@@ -1,12 +1,12 @@
 import "tailwindcss/tailwind.css";
 import Layout from "@/components/Layout";
 import ButtonBlue from "@/components/ButtonBlue";
-import Link from "next/link";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
 
 const SignUp = () => {
+  const [hydrated, setHydrated] = useState(false);
   const [signUpEmail, setRegisterEmail] = useState("");
   const [signUpPassword, setRegisterPassword] = useState("");
 
@@ -25,16 +25,19 @@ const SignUp = () => {
         )
       );
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(`${errorCode}: ${errorMessage}`);
+      console.error(error);
+      return;
     }
   };
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+  if (!hydrated) return null;
 
   return (
     <>
       <Layout>
-        <h1>ユーザー新規登録</h1>
         <form onSubmit={handleSubmit}>
           <div>
             <label>メールアドレス</label>
@@ -54,7 +57,7 @@ const SignUp = () => {
               onChange={(event) => setRegisterPassword(event.target.value)}
             />
           </div>
-          <ButtonBlue>登録する</ButtonBlue>
+          <ButtonBlue>ユーザ登録</ButtonBlue>
         </form>
       </Layout>
     </>

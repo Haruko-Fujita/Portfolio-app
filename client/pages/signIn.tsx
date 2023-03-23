@@ -1,11 +1,12 @@
 import "tailwindcss/tailwind.css";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
 import Layout from "@/components/Layout";
 import ButtonBlue from "@/components/ButtonBlue";
 
 const SignIn = () => {
+  const [hydrated, setHydrated] = useState(false);
   const [signInEmail, setLoginEmail] = useState("");
   const [signInPassword, setLoginPassword] = useState("");
   const [user, setUser] = useState();
@@ -27,6 +28,11 @@ const SignIn = () => {
     }
   };
 
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+  if (!hydrated) return null;
+
   return (
     <>
       {/* ログインしている場合、リンク表示
@@ -35,7 +41,6 @@ const SignIn = () => {
         <a href="/MyPage">go to myPage</a>
       ) : (
         <Layout>
-            <h1>ログインページ</h1>
             <form onSubmit={handleSubmit}>
               <div>
                 <label>メールアドレス</label>
@@ -57,8 +62,6 @@ const SignIn = () => {
               </div>
               <ButtonBlue>ログイン</ButtonBlue>
             </form>
-            <p></p>
-            <a href="/signUp">ユーザー新規登録はこちら</a>
         </Layout>
       )}
     </>
