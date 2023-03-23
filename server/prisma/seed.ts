@@ -7,8 +7,6 @@ const skillSeeds = [
   { language: "TypeScript", framework: "Next.js" },
   { language: "Python", framework: "Flask" },
   { language: "Ruby", framework: "Ruby on Rails" },
-  { language: "PHP", framework: "Laravel" },
-  { language: "Java", framework: null },
   { language: "Python", framework: "Django" },
   { language: "SQL", framework: "Prisma" },
 ];
