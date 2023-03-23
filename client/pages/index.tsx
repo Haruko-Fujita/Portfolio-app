@@ -1,6 +1,9 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import Link from 'next/link';
+import "tailwindcss/tailwind.css";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import Link from "next/link";
+import Layout from "@/components/Layout";
+import ButtonBlue from "@/components/ButtonBlue";
 
 export default function Home() {
   return (
@@ -14,12 +17,18 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>Welcome to Portfolio</h1>
-        <Link href="/MyPage" className={styles.card}>MyPage</Link>
-        <Link href="/login" className={styles.card}>login</Link>
-        <Link href="/register" className={styles.card}>register</Link>
+        <Layout>
+          <ButtonBlue>
+            <Link href="/MyPage">マイページ</Link>
+          </ButtonBlue>
+          <ButtonBlue>
+            <Link href="/signIn">ログイン</Link>
+          </ButtonBlue>
+          <ButtonBlue>
+            <Link href="/signUp">ユーザ登録</Link>
+          </ButtonBlue>
+        </Layout>
       </main>
-
     </div>
-  )
+  );
 }

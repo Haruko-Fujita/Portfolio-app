@@ -26,7 +26,7 @@ interface FormInput {
 export default function FormAdd() {
   const router = useRouter();
 
-  const { register, handleSubmit } = useForm<FormInput>();
+  const { signUp, handleSubmit } = useForm<FormInput>();
 
   // todo追加API呼び出し
   const postTodo = async (data: FormInput) => {
@@ -65,7 +65,7 @@ export default function FormAdd() {
                       <ListRow>
                         <input
                           id="todo"
-                          {...register("todo", {
+                          {...signUp("todo", {
                             required: true,
                             maxLength: 100,
                           })}
@@ -77,7 +77,7 @@ export default function FormAdd() {
                       <ListRow>
                         <select
                           id="type"
-                          {...register("type", { required: true })}
+                          {...signUp("type", { required: true })}
                           className="block appearance-none w-full bg-white border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white"
                         >
                           <option value="0">Type</option>
@@ -89,7 +89,7 @@ export default function FormAdd() {
                       <ListRow>
                         <select
                           id="status"
-                          {...register("status", { required: true })}
+                          {...signUp("status", { required: true })}
                           className="block appearance-none w-full bg-white border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white"
                         >
                           <option value="0">Status</option>

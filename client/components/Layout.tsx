@@ -1,5 +1,4 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import Link from "next/link";
 
 export default function Layout({ children }) {
@@ -14,7 +13,7 @@ export default function Layout({ children }) {
       </Head>
 
       <header className="flex justify-between items-center mx-2">
-        <h1 className="italic mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Todo list</h1>
+        <h1 className="italic mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">ポートフォリオ登録アプリ</h1>
         <Link href="/" className="mx-8 italic font-bold text-lg underline decoration-solid">
           Home
         </Link>

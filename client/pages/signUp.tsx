@@ -1,11 +1,11 @@
-import Link from 'next/link';
+import Link from "next/link";
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
 
-const Register = () => {
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
+const SignUp = () => {
+  const [signUpEmail, setRegisterEmail] = useState("");
+  const [signUpPassword, setRegisterPassword] = useState("");
 
   // ユーザ登録
   const handleSubmit = async (event) => {
@@ -14,11 +14,14 @@ const Register = () => {
     try {
       await createUserWithEmailAndPassword(
         auth,
-        registerEmail,
-        registerPassword
-      )
-      .then(alert(`${registerEmail}を登録しました。homeに戻ってログインしてください。`));
-    } catch(error) {
+        signUpEmail,
+        signUpPassword
+      ).then(
+        alert(
+          `${signUpEmail}を登録しました。homeに戻ってログインしてください。`
+        )
+      );
+    } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       alert(`${errorCode}: ${errorMessage}`);
@@ -34,7 +37,7 @@ const Register = () => {
           <input
             name="email"
             type="email"
-            value={registerEmail}
+            value={signUpEmail}
             onChange={(event) => setRegisterEmail(event.target.value)}
           />
         </div>
@@ -43,7 +46,7 @@ const Register = () => {
           <input
             name="password"
             type="password"
-            value={registerPassword}
+            value={signUpPassword}
             onChange={(event) => setRegisterPassword(event.target.value)}
           />
         </div>
@@ -51,7 +54,7 @@ const Register = () => {
       </form>
 
       <p></p>
-      <a href="/login">ログインはこちら</a>
+      <a href="/signIn">ログインはこちら</a>
 
       <p></p>
       <a href="/">back to home</a>
@@ -59,4 +62,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignUp;
