@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
 import Layout from "@/components/Layout";
 import ButtonBlue from "@/components/ButtonBlue";
+import InputSignForm from "@/components/InputSignForm";
 
 const SignIn = () => {
   const [hydrated, setHydrated] = useState(false);
@@ -61,6 +62,7 @@ const SignIn = () => {
                 />
               </div>
               <ButtonBlue>ログイン</ButtonBlue>
+              <InputSignForm></InputSignForm>
             </form>
         </Layout>
       )}
