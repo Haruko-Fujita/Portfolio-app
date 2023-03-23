@@ -1,10 +1,13 @@
+import "tailwindcss/tailwind.css";
 import Link from "next/link";
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
 import axios from "axios";
 import Upload from "./uploadImg";
 import NotFound from "./NotFound";
+import ButtonBlue from "@/components/ButtonBlue";
+import Layout from "@/components/Layout";
 
 const ENDPOINT = "http://localhost:5000/works/";
 
@@ -50,53 +53,51 @@ const MyPage = ({ worksData }) => {
             </>
           ) : (
             <>
-              {/* ログイン時にuserを表示、三項演算子(= user && user.email) */}
-              <p>ログインユーザー：{user?.email}</p>
-              <h1>マイページ</h1>
-              <div>
-                {worksData.map(
-                  (
-                    work: {
-                      id: number;
-                      title: string;
-                      link: string;
-                      image: string;
-                      user: { name: string };
-                      skill: { language: string; framework: string };
-                    },
-                    index: number
-                  ) => {
-                    return (
-                      <div key={index}>
-                        <ol>
-                          <li>タイトル_{work.title}</li>
-                          <li>ユーザ_{work.user.name}</li>
-                          <li>作成日_{work.createdAt}</li>
-                          <li>言語_{work.skill.language}</li>
-                          <li>フレームワーク_{work.skill.framework}</li>
-                          <li>
-                            <a href={work.link} target="_blank">
-                              {work.link}
-                            </a>
-                          </li>
-                          <img src="work.image" />
-                        </ol>
-                      </div>
-                    );
-                  }
-                )}
-              </div>
-
-              <div>{Upload()}</div>
-              <p></p>
-              <button onClick={logout}>ログアウト</button>
-              <p></p>
-              <Link href="/">back to home</Link>
-              <p></p>
-              <img
-                src="https://bc-w6-portfolio.s3.ap-northeast-1.amazonaws.com/bc-w6.png"
-                width="10%"
-              />
+              <Layout>
+                {/* ログイン時にuserを表示、三項演算子(= user && user.email) */}
+                <p>ログインユーザー：{user?.email}</p>
+                <h1>マイページ</h1>
+                <div>
+                  {worksData.map(
+                    (
+                      work: {
+                        id: number;
+                        title: string;
+                        link: string;
+                        image: string;
+                        user: { name: string };
+                        skill: { language: string; framework: string };
+                      },
+                      index: number
+                    ) => {
+                      return (
+                        <div key={index}>
+                          <ol>
+                            <li>タイトル_{work.title}</li>
+                            <li>ユーザ_{work.user.name}</li>
+                            <li>作成日_{work.createdAt}</li>
+                            <li>言語_{work.skill.language}</li>
+                            <li>フレームワーク_{work.skill.framework}</li>
+                            <li>
+                              <a href={work.link} target="_blank">
+                                {work.link}
+                              </a>
+                            </li>
+                            <img src="work.image" />
+                          </ol>
+                        </div>
+                      );
+                    }
+                  )}
+                </div>
+                <div>{Upload()}</div>
+                <p></p>
+                <ButtonBlue><div onClick={logout}>ログアウト</div></ButtonBlue>
+                <img
+                  src="https://bc-w6-portfolio.s3.ap-northeast-1.amazonaws.com/bc-w6.png"
+                  width="10%"
+                />
+              </Layout>
             </>
           )}
         </>

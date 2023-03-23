@@ -24,7 +24,7 @@
 ## 使い方
 
 1. リポジトリのクローン  
-`git clone https://github.com/Haruko-Fujita/Portfolio-app.git`
+   `git clone https://github.com/Haruko-Fujita/Portfolio-app.git`
 
 2. server 起動  
    `cd server` `npm install`  
