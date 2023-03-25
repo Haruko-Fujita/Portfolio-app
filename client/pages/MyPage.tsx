@@ -87,11 +87,7 @@ const MyPage = ({ worksData }) => {
                             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                               <tr className="hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <ListRow>
-                                  {/* <img src="work.image" /> */}
-                                  <img
-                                    src="https://bc-w6-portfolio.s3.ap-northeast-1.amazonaws.com/bc-w6.png"
-                                    width="100px"
-                                  />
+                                  <img width="100px" src={work.image} />
                                 </ListRow>
                                 <ListRow>
                                   <p>{work.title}</p>
