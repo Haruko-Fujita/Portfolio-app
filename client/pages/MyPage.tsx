@@ -11,11 +11,11 @@ import Layout from "@/components/Layout";
 import Title from "@/components/Title";
 import ListRow from "@/components/ListRow";
 
-const ENDPOINT = "http://localhost:5000/works/";
-
 // works取得API呼び出し
 const getWorks = async () => {
-  return await axios.get(ENDPOINT).then((res) => res.data);
+  return await axios
+    .get(process.env.NEXT_PUBLIC_ENDPOINT)
+    .then((res) => res.data);
 };
 
 // 読み込み時にAPIからuser/worksデータを取得
