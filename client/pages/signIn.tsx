@@ -39,19 +39,23 @@ const SignIn = () => {
       <Layout>
         <form onSubmit={handleSubmit}>
           <div>
-            <label>メールアドレス</label>
+            {/* <label>メールアドレス</label> */}
             <input
               name="email"
               type="email"
+              className="m-4 p-2 block w-1/4 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              placeholder="john@example.com"
               value={signInEmail}
               onChange={(event) => setSignInEmail(event.target.value)}
             />
           </div>
           <div>
-            <label>パスワード</label>
+            {/* <label>パスワード</label> */}
             <input
               name="password"
               type="password"
+              className="m-4 p-2 block w-1/4 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              placeholder="password（6文字以上）"
               value={signInPassword}
               onChange={(event) => setSignInPassword(event.target.value)}
             />
