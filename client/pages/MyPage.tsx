@@ -8,6 +8,8 @@ import Upload from "./uploadImg";
 import NotFound from "./NotFound";
 import ButtonBlue from "@/components/ButtonBlue";
 import Layout from "@/components/Layout";
+import Title from "@/components/Title";
+import ListRow from "@/components/ListRow";
 
 const ENDPOINT = "http://localhost:5000/works/";
 
@@ -54,9 +56,6 @@ const MyPage = ({ worksData }) => {
           ) : (
             <>
               <Layout>
-                {/* ログイン時にuserを表示、三項演算子(= user && user.email) */}
-                <p>ログインユーザー：{user?.email}</p>
-                <h1>マイページ</h1>
                 <div>
                   {worksData.map(
                     (
@@ -72,31 +71,50 @@ const MyPage = ({ worksData }) => {
                     ) => {
                       return (
                         <div key={index}>
-                          <ol>
-                            <li>タイトル_{work.title}</li>
-                            <li>ユーザ_{work.user.name}</li>
-                            <li>作成日_{work.createdAt}</li>
-                            <li>言語_{work.skill.language}</li>
-                            <li>フレームワーク_{work.skill.framework}</li>
-                            <li>
-                              <a href={work.link} target="_blank">
-                                {work.link}
-                              </a>
-                            </li>
-                            <img src="work.image" />
-                          </ol>
+                          <div >{work.user.name} さんのマイページ</div>
+                          <table>
+                            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                              <thead>
+                                <tr>
+                                  <Title>作品タイトル</Title>
+                                  <Title>作成日</Title>
+                                  <Title>言語</Title>
+                                  <Title>フレームワーク</Title>
+                                  <Title>リンク</Title>
+                                  <Title>画像</Title>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                <tr className="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                  <ListRow>{work.title}</ListRow>
+                                  <ListRow>{work.createdAt}</ListRow>
+                                  <ListRow>{work.skill.language}</ListRow>
+                                  <ListRow>{work.skill.framework}</ListRow>
+                                  <ListRow>
+                                    <a href={work.link} target="_blank">
+                                      {work.link}
+                                    </a>
+                                  </ListRow>
+                                  <ListRow>
+                                    {/* <img src="work.image" /> */}
+                                    <img
+                                      src="https://bc-w6-portfolio.s3.ap-northeast-1.amazonaws.com/bc-w6.png"
+                                      width="10%"
+                                    />
+                                  </ListRow>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </table>
                         </div>
                       );
                     }
                   )}
                 </div>
                 <div>{Upload()}</div>
-                <p></p>
-                <ButtonBlue><div onClick={logout}>ログアウト</div></ButtonBlue>
-                <img
-                  src="https://bc-w6-portfolio.s3.ap-northeast-1.amazonaws.com/bc-w6.png"
-                  width="10%"
-                />
+                <ButtonBlue>
+                  <div onClick={logout}>ログアウト</div>
+                </ButtonBlue>
               </Layout>
             </>
           )}
