@@ -94,9 +94,7 @@ const MyPage = ({ worksData }) => {
                                 <ListRow>
                                   <p>{work.title}</p>
                                   <p>
-                                    <a href={work.link} target="_blank">
-                                      {work.link}
-                                    </a>
+                                    <Link href={work.link}>作品リンク</Link>
                                   </p>
                                 </ListRow>
                                 <ListRow>
