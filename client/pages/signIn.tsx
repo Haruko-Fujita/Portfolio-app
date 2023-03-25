@@ -39,7 +39,6 @@ const SignIn = () => {
       <Layout>
         <form onSubmit={handleSubmit}>
           <div>
-            {/* <label>メールアドレス</label> */}
             <input
               name="email"
               type="email"
@@ -50,7 +49,6 @@ const SignIn = () => {
             />
           </div>
           <div>
-            {/* <label>パスワード</label> */}
             <input
               name="password"
               type="password"
