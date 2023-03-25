@@ -8,12 +8,26 @@ import Upload from "./uploadImg";
 import NotFound from "./NotFound";
 import ButtonBlue from "@/components/ButtonBlue";
 import Layout from "@/components/Layout";
+import Title from "@/components/Title";
+import ListRow from "@/components/ListRow";
+import { DailyTime } from "aws-sdk/clients/fsx";
+import { useRouter } from "next/router";
 
-const ENDPOINT = "http://localhost:5000/works/";
+interface Work {
+  id: number;
+  title: string;
+  link: string;
+  image: string;
+  user: { name: string };
+  skill: { language: string; framework: string };
+  createdAt: DailyTime;
+}
 
 // works取得API呼び出し
 const getWorks = async () => {
-  return await axios.get(ENDPOINT).then((res) => res.data);
+  return await axios
+    .get(process.env.NEXT_PUBLIC_ENDPOINT)
+    .then((res) => res.data);
 };
 
 // 読み込み時にAPIからuser/worksデータを取得
@@ -25,6 +39,7 @@ export async function getServerSideProps() {
 }
 
 const MyPage = ({ worksData }) => {
+  const router = useRouter();
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -38,7 +53,7 @@ const MyPage = ({ worksData }) => {
 
   const logout = async () => {
     await signOut(auth);
-    <div>{NotFound()}</div>;
+    router.push("/");
   };
 
   return (
@@ -54,49 +69,49 @@ const MyPage = ({ worksData }) => {
           ) : (
             <>
               <Layout>
-                {/* ログイン時にuserを表示、三項演算子(= user && user.email) */}
-                <p>ログインユーザー：{user?.email}</p>
-                <h1>マイページ</h1>
                 <div>
-                  {worksData.map(
-                    (
-                      work: {
-                        id: number;
-                        title: string;
-                        link: string;
-                        image: string;
-                        user: { name: string };
-                        skill: { language: string; framework: string };
-                      },
-                      index: number
-                    ) => {
-                      return (
-                        <div key={index}>
-                          <ol>
-                            <li>タイトル_{work.title}</li>
-                            <li>ユーザ_{work.user.name}</li>
-                            <li>作成日_{work.createdAt}</li>
-                            <li>言語_{work.skill.language}</li>
-                            <li>フレームワーク_{work.skill.framework}</li>
-                            <li>
-                              <a href={work.link} target="_blank">
-                                {work.link}
-                              </a>
-                            </li>
-                            <img src="work.image" />
-                          </ol>
-                        </div>
-                      );
-                    }
-                  )}
+                  {worksData.map((work: Work, index: number) => {
+                    return (
+                      <div key={index}>
+                        <div>{work.user.name} さんのマイページ</div>
+                        <table>
+                          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead>
+                              <tr>
+                                <Title>画像</Title>
+                                <Title>作品タイトル</Title>
+                                <Title>言語/フレームワーク</Title>
+                                <Title>作成日</Title>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                              <tr className="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <ListRow>
+                                  <img width="100px" src={work.image} />
+                                </ListRow>
+                                <ListRow>
+                                  <p>{work.title}</p>
+                                  <p>
+                                    <Link href={work.link}>作品リンク</Link>
+                                  </p>
+                                </ListRow>
+                                <ListRow>
+                                  <p>{work.skill.language}</p>
+                                  <p>{work.skill.framework}</p>
+                                </ListRow>
+                                <ListRow>{work.createdAt}</ListRow>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </table>
+                      </div>
+                    );
+                  })}
                 </div>
                 <div>{Upload()}</div>
-                <p></p>
-                <ButtonBlue><div onClick={logout}>ログアウト</div></ButtonBlue>
-                <img
-                  src="https://bc-w6-portfolio.s3.ap-northeast-1.amazonaws.com/bc-w6.png"
-                  width="10%"
-                />
+                <ButtonBlue>
+                  <div onClick={logout}>ログアウト</div>
+                </ButtonBlue>
               </Layout>
             </>
           )}
