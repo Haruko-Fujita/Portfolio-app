@@ -4,12 +4,13 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
 import Layout from "@/components/Layout";
 import ButtonBlue from "@/components/ButtonBlue";
+import { useRouter } from "next/router";
 
 const SignIn = () => {
+  const router = useRouter();
   const [hydrated, setHydrated] = useState(false);
-  const [signInEmail, setLoginEmail] = useState("");
-  const [signInPassword, setLoginPassword] = useState("");
-  const [user, setUser] = useState();
+  const [signInEmail, setSignInEmail] = useState("");
+  const [signInPassword, setSignInPassword] = useState("");
 
   // ログイン認証
   const handleSubmit = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,14 +18,14 @@ const SignIn = () => {
 
     try {
       await signInWithEmailAndPassword(auth, signInEmail, signInPassword).then(
-        setUser(true)
-      ); //サインインok //review 認証されたuserをsetする??
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(
-        `メールアドレスまたはパスワードが間違っています。${errorCode}: ${errorMessage}`
+        (res) => {
+          if (res.user.accessToken !== null) {
+            router.push("/MyPage");
+          }
+        }
       );
+    } catch (error) {
+      router.reload();
     }
   };
 
@@ -35,35 +36,31 @@ const SignIn = () => {
 
   return (
     <>
-      {/* ログインしている場合、リンク表示
-        <div>{MyPage()}</div>にするとエラー(SSRでprops取得できず) */}
-      {user ? (
-        <a href="/MyPage">go to myPage</a>
-      ) : (
-        <Layout>
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label>メールアドレス</label>
-                <input
-                  name="email"
-                  type="email"
-                  value={signInEmail}
-                  onChange={(event) => setLoginEmail(event.target.value)}
-                />
-              </div>
-              <div>
-                <label>パスワード</label>
-                <input
-                  name="password"
-                  type="password"
-                  value={signInPassword}
-                  onChange={(event) => setLoginPassword(event.target.value)}
-                />
-              </div>
-              <ButtonBlue>ログイン</ButtonBlue>
-            </form>
-        </Layout>
-      )}
+      <Layout>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>メールアドレス</label>
+            <input
+              name="email"
+              type="email"
+              value={signInEmail}
+              onChange={(event) => setSignInEmail(event.target.value)}
+            />
+          </div>
+          <div>
+            <label>パスワード</label>
+            <input
+              name="password"
+              type="password"
+              value={signInPassword}
+              onChange={(event) => setSignInPassword(event.target.value)}
+            />
+          </div>
+          <ButtonBlue>
+            <button>ログイン</button>
+          </ButtonBlue>
+        </form>
+      </Layout>
     </>
   );
 };
