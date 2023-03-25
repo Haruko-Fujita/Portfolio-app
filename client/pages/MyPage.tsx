@@ -11,6 +11,7 @@ import Layout from "@/components/Layout";
 import Title from "@/components/Title";
 import ListRow from "@/components/ListRow";
 import { DailyTime } from "aws-sdk/clients/fsx";
+import { useRouter } from "next/router";
 
 interface Work {
   id: number;
@@ -38,6 +39,7 @@ export async function getServerSideProps() {
 }
 
 const MyPage = ({ worksData }) => {
+  const router = useRouter();
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -51,7 +53,7 @@ const MyPage = ({ worksData }) => {
 
   const logout = async () => {
     await signOut(auth);
-    <div>{NotFound()}</div>;
+    router.push("/");
   };
 
   return (
