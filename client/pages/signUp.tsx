@@ -4,11 +4,14 @@ import ButtonBlue from "@/components/ButtonBlue";
 import { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../FirebaseConfig";
+import { useRouter } from "next/router";
 
 const SignUp = () => {
+  const router = useRouter();
   const [hydrated, setHydrated] = useState(false);
-  const [signUpEmail, setRegisterEmail] = useState("");
-  const [signUpPassword, setRegisterPassword] = useState("");
+  const [signUpEmail, setSignUpEmail] = useState("");
+  const [signUpPassword, setSignUpPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   // ユーザ登録
   const handleSubmit = async (event) => {
@@ -19,13 +22,14 @@ const SignUp = () => {
         auth,
         signUpEmail,
         signUpPassword
-      ).then(
-        alert(
-          `${signUpEmail}を登録しました。homeに戻ってログインしてください。`
-        )
-      );
+      ).then((res) => {
+        console.log(res);
+        if (res.user.accessToken !== null) {
+          router.push("/");
+        }
+      });
     } catch (error) {
-      console.error(error);
+      setMessage("※※ 入力内容を確認して下さい ※※");
       return;
     }
   };
@@ -40,12 +44,13 @@ const SignUp = () => {
       <Layout>
         <form onSubmit={handleSubmit}>
           <div>
+            <div className="text-blue-900">{message}</div>
             <label>メールアドレス</label>
             <input
               name="email"
               type="email"
               value={signUpEmail}
-              onChange={(event) => setRegisterEmail(event.target.value)}
+              onChange={(event) => setSignUpEmail(event.target.value)}
             />
           </div>
           <div>
@@ -54,10 +59,12 @@ const SignUp = () => {
               name="password"
               type="password"
               value={signUpPassword}
-              onChange={(event) => setRegisterPassword(event.target.value)}
+              onChange={(event) => setSignUpPassword(event.target.value)}
             />
           </div>
-          <ButtonBlue>ユーザ登録</ButtonBlue>
+          <ButtonBlue>
+            <button>ユーザ登録</button>
+          </ButtonBlue>
         </form>
       </Layout>
     </>
