@@ -10,6 +10,17 @@ import ButtonBlue from "@/components/ButtonBlue";
 import Layout from "@/components/Layout";
 import Title from "@/components/Title";
 import ListRow from "@/components/ListRow";
+import { DailyTime } from "aws-sdk/clients/fsx";
+
+interface Work {
+  id: number;
+  title: string;
+  link: string;
+  image: string;
+  user: { name: string };
+  skill: { language: string; framework: string };
+  createdAt: DailyTime;
+}
 
 // works取得API呼び出し
 const getWorks = async () => {
@@ -57,61 +68,49 @@ const MyPage = ({ worksData }) => {
             <>
               <Layout>
                 <div>
-                  {worksData.map(
-                    (
-                      work: {
-                        id: number;
-                        title: string;
-                        link: string;
-                        image: string;
-                        user: { name: string };
-                        skill: { language: string; framework: string };
-                      },
-                      index: number
-                    ) => {
-                      return (
-                        <div key={index}>
-                          <div>{work.user.name} さんのマイページ</div>
-                          <table>
-                            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                              <thead>
-                                <tr>
-                                  <Title>画像</Title>
-                                  <Title>作品タイトル</Title>
-                                  <Title>言語/フレームワーク</Title>
-                                  <Title>作成日</Title>
-                                </tr>
-                              </thead>
-                              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                                <tr className="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                  <ListRow>
-                                    {/* <img src="work.image" /> */}
-                                    <img
-                                      src="https://bc-w6-portfolio.s3.ap-northeast-1.amazonaws.com/bc-w6.png"
-                                      width="100px"
-                                    />
-                                  </ListRow>
-                                  <ListRow>
-                                    <p>{work.title}</p>
-                                    <p>
-                                      <a href={work.link} target="_blank">
-                                        {work.link}
-                                      </a>
-                                    </p>
-                                  </ListRow>
-                                  <ListRow>
-                                    <p>{work.skill.language}</p>
-                                    <p>{work.skill.framework}</p>
-                                  </ListRow>
-                                  <ListRow>{work.createdAt}</ListRow>
-                                </tr>
-                              </tbody>
-                            </table>
+                  {worksData.map((work: Work, index: number) => {
+                    return (
+                      <div key={index}>
+                        <div>{work.user.name} さんのマイページ</div>
+                        <table>
+                          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead>
+                              <tr>
+                                <Title>画像</Title>
+                                <Title>作品タイトル</Title>
+                                <Title>言語/フレームワーク</Title>
+                                <Title>作成日</Title>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                              <tr className="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <ListRow>
+                                  {/* <img src="work.image" /> */}
+                                  <img
+                                    src="https://bc-w6-portfolio.s3.ap-northeast-1.amazonaws.com/bc-w6.png"
+                                    width="100px"
+                                  />
+                                </ListRow>
+                                <ListRow>
+                                  <p>{work.title}</p>
+                                  <p>
+                                    <a href={work.link} target="_blank">
+                                      {work.link}
+                                    </a>
+                                  </p>
+                                </ListRow>
+                                <ListRow>
+                                  <p>{work.skill.language}</p>
+                                  <p>{work.skill.framework}</p>
+                                </ListRow>
+                                <ListRow>{work.createdAt}</ListRow>
+                              </tr>
+                            </tbody>
                           </table>
-                        </div>
-                      );
-                    }
-                  )}
+                        </table>
+                      </div>
+                    );
+                  })}
                 </div>
                 <div>{Upload()}</div>
                 <ButtonBlue>
